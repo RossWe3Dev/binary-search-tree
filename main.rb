@@ -34,3 +34,7 @@ test.pretty_print
 
 puts "\nTesting if nothing changes when deleting a value that's not part of the tree"
 test.delete(45)
+
+puts "\nTest #find"
+p test.find(100)
+p test.find(500)
