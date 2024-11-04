@@ -35,6 +35,15 @@ test.pretty_print
 puts "\nTesting if nothing changes when deleting a value that's not part of the tree"
 test.delete(45)
 
-puts "\nTest #find"
+puts "\nTesting #find"
 p test.find(100)
 p test.find(500)
+
+puts "\nTesting #level_order"
+p test.level_order
+test.level_order { |x| print "#{x.data} " }
+
+puts "\nTesting #level_order_rec"
+p test.level_order_rec
+test.level_order_rec { |x| print "#{x.data} " }
+

@@ -83,4 +83,28 @@ class Tree
     find(value, node.left) if value < node.data
     find(value, node.right) if value > node.data
   end
+
+  def level_order(&block)
+    queue = [@root]
+    result = []
+
+    until queue.empty?
+      node = queue.shift
+      block_given? ? (yield node) : (result << node.data)
+      queue << node.left if node.left
+      queue << node.right if node.right
+    end
+
+    result unless block_given?
+  end
+
+  def level_order_rec(node = @root, queue = [], result = [], &block)
+    block_given? ? (yield node) : (result << node.data)
+    queue << node.left if node.left
+    queue << node.right if node.right
+
+    block_given? ? (return if queue.empty?) : (return result if queue.empty?)
+
+    level_order_rec(queue.shift, queue, result, &block)
+  end
 end
