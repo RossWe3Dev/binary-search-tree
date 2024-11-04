@@ -14,8 +14,23 @@ puts "\nThis shouldn't add anything"
 test.insert(67)
 test.pretty_print
 
-puts "\nThis should add 3 leaf nodes of value: 2, 39 and 100 "
+puts "\nThis should add 3 leaf nodes of value: 2, 39 and 100; then add (98) and (96) as children of (100)"
 test.insert(2)
 test.insert(39)
 test.insert(100)
+test.insert(98)
+test.insert(96)
 test.pretty_print
+
+puts "\nTesting #delete on leaf nodes (2) and (6345)"
+test.delete(2)
+test.delete(6345)
+test.pretty_print
+
+puts "\nTesting #delete on a node with a single left child (324) and one with both (4)"
+test.delete(324)
+test.delete(4)
+test.pretty_print
+
+puts "\nTesting if nothing changes when deleting a value that's not part of the tree"
+test.delete(45)

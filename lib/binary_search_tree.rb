@@ -44,4 +44,35 @@ class Tree
     end
     node
   end
+
+  # find the inorder successor, the bottom left node of the right subtree of current_node
+  def get_successor(current_node)
+    current_node = current_node.right
+    current_node = current_node.left while !current_node.nil? && !current_node.left.nil?
+    current_node
+  end
+
+  def delete(value, node = @root)
+    return node if node.nil?
+
+    # traverse if value is in a sub-tree
+    if value < node.data
+      node.left = delete(value, node.left)
+    elsif value > node.data
+      node.right = delete(value, node.right)
+    else
+      # delete leaf node or node that has only a right child (skip to the next node)
+      return node.right if node.left.nil?
+
+      # delete a node with a single left child
+      return node.left if node.right.nil?
+
+      # delete a node with both children => replace it with the inorder successor, than delete it
+      inorder_succ = get_successor(node)
+      node.data = inorder_succ.data
+      node.right = delete(inorder_succ.data, node.right)
+    end
+
+    node
+  end
 end
