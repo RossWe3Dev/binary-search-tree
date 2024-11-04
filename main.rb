@@ -43,7 +43,15 @@ puts "\nTesting #level_order"
 p test.level_order
 test.level_order { |x| print "#{x.data} " }
 
-puts "\nTesting #level_order_rec"
+puts "\n\nTesting #level_order_rec"
 p test.level_order_rec
 test.level_order_rec { |x| print "#{x.data} " }
 
+puts "\n\nTesting #inorder"
+p test.inorder
+
+puts "\nTesting #preorder"
+p test.preorder
+
+puts "\nTesting #postorder"
+p test.postorder

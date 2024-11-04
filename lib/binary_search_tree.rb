@@ -98,6 +98,7 @@ class Tree
     result unless block_given?
   end
 
+  # correctly accepts a block to yield control on message output but it is convoluted
   def level_order_rec(node = @root, queue = [], result = [], &block)
     block_given? ? (yield node) : (result << node.data)
     queue << node.left if node.left
@@ -106,5 +107,48 @@ class Tree
     block_given? ? (return if queue.empty?) : (return result if queue.empty?)
 
     level_order_rec(queue.shift, queue, result, &block)
+  end
+
+  # from here to the end will not handle block_given? and will just return a result array
+
+  # the following method is not called in the driver, here to point the difference
+  def level_order_rec_no_block(node = @root, queue = [], result = [])
+    result << node.data if node
+    queue << node.left if node.left
+    queue << node.right if node.right
+
+    return result if queue.empty?
+
+    level_order_rec(queue.shift, queue, result, &block)
+  end
+
+  def inorder(node = @root, result = [])
+    return if node.nil?
+
+    inorder(node.left, result)
+    result << node.data
+    inorder(node.right, result)
+
+    result
+  end
+
+  def preorder(node = @root, result = [])
+    return if node.nil?
+
+    result << node.data
+    preorder(node.left, result)
+    preorder(node.right, result)
+
+    result
+  end
+
+  def postorder(node = @root, result = [])
+    return if node.nil?
+
+    postorder(node.left, result)
+    postorder(node.right, result)
+    result << node.data
+
+    result
   end
 end
