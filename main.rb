@@ -38,6 +38,7 @@ test.delete(45)
 puts "\nTesting #find"
 p test.find(100)
 p test.find(500)
+p test.find(5)
 
 puts "\nTesting #level_order"
 p test.level_order
@@ -55,3 +56,9 @@ p test.preorder
 
 puts "\nTesting #postorder"
 p test.postorder
+
+puts "\nTesting #height"
+p test.height
+p test.height(test.find(4))
+p test.height(test.find(67))
+p test.height(test.find(5))

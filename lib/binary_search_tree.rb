@@ -80,8 +80,11 @@ class Tree
     return nil if node.nil?
     return node if node.data == value
 
-    find(value, node.left) if value < node.data
-    find(value, node.right) if value > node.data
+    if value < node.data
+      find(value, node.left)
+    else
+      find(value, node.right)
+    end
   end
 
   def level_order(&block)
@@ -111,7 +114,7 @@ class Tree
 
   # from here to the end will not handle block_given? and will just return a result array
 
-  # the following method is not called in the driver, here to point the difference
+  # the following method is not called in the driver, shown here to point the difference
   def level_order_rec_no_block(node = @root, queue = [], result = [])
     result << node.data if node
     queue << node.left if node.left
@@ -150,5 +153,14 @@ class Tree
     result << node.data
 
     result
+  end
+
+  def height(node = @root)
+    return 0 if node.nil?
+
+    left_height = height(node.left)
+    right_height = height(node.right)
+
+    1 + [left_height, right_height].max
   end
 end
