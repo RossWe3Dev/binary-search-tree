@@ -60,5 +60,12 @@ p test.postorder
 puts "\nTesting #height"
 p test.height
 p test.height(test.find(4))
+p test.height(test.find(96))
 p test.height(test.find(67))
 p test.height(test.find(5))
+
+puts "\nTesting #depth"
+p test.depth
+p test.depth(test.find(4))
+p test.depth(test.find(96))
+p test.depth(test.find(3))

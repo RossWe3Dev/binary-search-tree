@@ -155,12 +155,24 @@ class Tree
     result
   end
 
+  # #height and #depth return -1 if node isn't found, necessary for #max
+
   def height(node = @root)
-    return 0 if node.nil?
+    return -1 if node.nil?
 
     left_height = height(node.left)
     right_height = height(node.right)
 
     1 + [left_height, right_height].max
+  end
+
+  def depth(node = @root, current_node = @root, current_depth = 0)
+    return current_depth if current_node == node
+    return -1 if current_node.nil? || node.nil?
+
+    left_depth = depth(node, current_node.left, current_depth + 1)
+    right_depth = depth(node, current_node.right, current_depth + 1)
+
+    [left_depth, right_depth].max
   end
 end
