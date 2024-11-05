@@ -43,7 +43,7 @@ class Tree
   # find the inorder successor, the bottom left node of the right subtree of current_node
   def get_successor(current_node)
     current_node = current_node.right
-    current_node = current_node.left while !current_node.nil? && !current_node.left.nil?
+    current_node = current_node.left until current_node.left.nil?
     current_node
   end
 
@@ -82,6 +82,7 @@ class Tree
     end
   end
 
+  # iterative approach to return level_order / breadth-first-search
   def level_order(&block)
     queue = [@root]
     result = []
@@ -96,6 +97,7 @@ class Tree
     result unless block_given?
   end
 
+  # recursive approach to return level_order / breadth-first-search
   # correctly accepts a block to yield control on message output but it is convoluted
   def level_order_rec(node = @root, queue = [], result = [], &block)
     block_given? ? (yield node) : (result << node.data)
@@ -107,8 +109,6 @@ class Tree
     level_order_rec(queue.shift, queue, result, &block)
   end
 
-  # from here to the end will not handle block_given? and will just return a result array
-
   # the following method is not called in the driver, shown here to point the difference
   def level_order_rec_no_block(node = @root, queue = [], result = [])
     result << node.data if node
@@ -119,6 +119,10 @@ class Tree
 
     level_order_rec(queue.shift, queue, result, &block)
   end
+
+  # from here on out will not handle block_given? and will just return a result array
+
+  # recursive approaches to return inorder, preorder and postorder / depth-first-search
 
   def inorder(node = @root, result = [])
     return if node.nil?
