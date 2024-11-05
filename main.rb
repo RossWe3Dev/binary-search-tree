@@ -69,3 +69,11 @@ p test.depth
 p test.depth(test.find(4))
 p test.depth(test.find(96))
 p test.depth(test.find(3))
+
+puts "\nTesting #balanced?"
+p test.balanced?
+
+puts "\nTesting #rebalance"
+test.rebalance
+p test.balanced?
+test.rebalance

@@ -175,4 +175,26 @@ class Tree
 
     [left_depth, right_depth].max
   end
+
+  # a tree is balanced when the difference between heights of left and right subtree of every node is not more than 1
+
+  def balanced?(node = @root)
+    return true if node.nil?
+
+    left_height = height(node.left)
+    right_height = height(node.right)
+
+    return false if (left_height - right_height).abs > 1
+
+    balanced?(node.left) && balanced?(node.right)
+  end
+
+  def rebalance
+    return puts "Tree is already balanced" if balanced?
+
+    @array = inorder
+    build_tree
+    puts "Tree is now balanced"
+    pretty_print
+  end
 end
